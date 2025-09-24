@@ -1,2 +1,2 @@
 # subscription-tracker
-A subscription tracker app
+A subscription tracker app with 1% Coding Hour
