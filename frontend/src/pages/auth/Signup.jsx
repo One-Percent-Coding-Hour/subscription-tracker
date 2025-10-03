@@ -5,6 +5,7 @@ import google from "../../assets/google.svg";
 import apple from "../../assets/apple.svg";
 import facebook from "../../assets/facebook.svg";
 import twitter from "../../assets/twitter.svg";
+import { Link } from "react-router-dom";
 
 const Signup = () => {
   return (
@@ -77,9 +78,11 @@ const Signup = () => {
 
                 <p className="text-center">
                   Already have an account?{" "}
-                  <span className="text-[#6938EF] font-bold underline cursor-pointer">
-                    Login
-                  </span>
+                  <Link to="/">
+                    <span className="text-[#6938EF] font-bold underline cursor-pointer">
+                      Sign In
+                    </span>
+                  </Link>
                 </p>
               </form>
             </div>

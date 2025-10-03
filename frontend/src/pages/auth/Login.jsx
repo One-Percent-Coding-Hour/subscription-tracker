@@ -1,17 +1,33 @@
 import { Github, IceCream } from "lucide-react";
-import React from "react";
+import React, { useContext, useState } from "react";
 
 import AuthLayout from "../../components/auth/authLayout";
 import google from "../../assets/google.svg";
 import apple from "../../assets/apple.svg";
 import facebook from "../../assets/facebook.svg";
 import twitter from "../../assets/twitter.svg";
+import { AuthContext } from "../../components/auth/AuthContext";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const { login } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    login(email, password);
+
+    navigate("/dashboard");
+  };
+
   return (
     <AuthLayout>
       <div>
-        <form action="" className="gap-5 flex flex-col">
+        <form onSubmit={handleSubmit} className="gap-5 flex flex-col">
           <div className="flex flex-col gap-2">
             <label htmlFor="" className="font-semibold">
               Email Address
@@ -20,6 +36,7 @@ const Login = () => {
               type="email"
               placeholder="youremailaddress@email.com"
               className="border p-2 rounded-lg"
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           <div className="flex flex-col gap-2">
@@ -30,18 +47,25 @@ const Login = () => {
               type="password"
               placeholder="**********"
               className="border p-2 rounded-lg"
+              onChange={(e) => setPassword(e.target.value)}
             />
           </div>
 
-          <button className="bg-[#6938EF] py-3 rounded-xl text-white font-bold">
+          <button
+            className="bg-[#6938EF] py-3 rounded-xl text-white font-bold"
+            type="submit"
+          >
             Login
           </button>
 
           <p className="text-center">
             Don't have an account?{" "}
-            <span className="text-[#6938EF] font-bold underline cursor-pointer">
-              Sign Up
-            </span>
+            
+            <Link to="/auth/signup">
+              <span className="text-[#6938EF] font-bold underline cursor-pointer">
+                Sign Up
+              </span>
+            </Link>
           </p>
         </form>
       </div>
