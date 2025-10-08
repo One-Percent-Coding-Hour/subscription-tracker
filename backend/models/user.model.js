@@ -36,6 +36,21 @@ const userSchema = new mongoose.Schema(
       type: Date,
       default: null,
     },
+    notificationPreferences: {
+      emailNotifications: {
+        type: Boolean,
+        default: true,
+      },
+      pushNotifications: {
+        type: Boolean,
+        default: false,
+      },
+    },
+    currencyPreference: {
+      type: String,
+      enum: ["USD", "EUR", "NGN"],
+      default: "NGN",
+    },
   },
   { timestamps: true }
 );
@@ -44,6 +59,8 @@ const userSchema = new mongoose.Schema(
 userSchema.set("toJSON", {
   transform: (_doc, userObject) => {
     delete userObject.password;
+    delete userObject.resetPasswordToken;
+    delete userObject.resetPasswordTokenExpiresAt;
     return userObject;
   },
 });
